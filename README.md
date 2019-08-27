@@ -31,7 +31,9 @@ model.fit(X_train, Y_train, epochs = epochs, batch_size = batch_size,callbacks =
 
 #### Contact
 
-E-mail: arunk609@gmail.com
+[E-mail](arunk609@gmail.com)
+
 [Github](https://github.com/CleanPegasus)
+
 [LinkedIn](https://www.linkedin.com/in/arunkumar-l/)
 
