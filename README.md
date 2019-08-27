@@ -21,3 +21,17 @@ histories = coffeeshop(token = secret, channel_name = channel_name, epoch_num = 
 model.fit(X_train, Y_train, epochs = epochs, batch_size = batch_size,callbacks = [histories])
 
 ```
+
+### Output sample
+
+<img src="readme_resources/sample_output.jpeg">
+</img>
+
+
+
+#### Contact
+
+E-mail: arunk609@gmail.com
+[Github](https://github.com/CleanPegasus)
+[LinkedIn](https://www.linkedin.com/in/arunkumar-l/)
+
