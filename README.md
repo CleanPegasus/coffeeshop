@@ -11,7 +11,7 @@ It uses slackclient and keras python packages.
 ### Code sample
 
 ```python
-from coffeeshop import coffeeshop
+from coffeeshop.coffeeshop import Coffeeshop
 
 secret = 'xoxp-slacktoken'
 channel_name = 'name_of_channel_to_be_posted'

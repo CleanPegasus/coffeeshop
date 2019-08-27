@@ -56,7 +56,9 @@ SCLK = Slacker()
             
 
 
-class coffeeshop(keras.callbacks.Callback):
+class Coffeeshop(keras.callbacks.Callback):
+
+    @staticmethod
 
     def __init__(self, token = None, channel_name = None, epoch_num = 1):
 
