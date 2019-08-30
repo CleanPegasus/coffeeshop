@@ -9,12 +9,12 @@ def readme():
 setup(
 
     name = "coffeeshop",
-    version = "1.0.3",
+    version = "1.1.0",
     description = "A python package that sends your deep learning training loss to your slack channel after every specified epoch.",
     long_description = readme(),
     long_description_content_type = "text/markdown",
     url = "https://github.com/CleanPegasus/coffeeshop",
-    author = "Arunkumar L",
+    author = "Arunkumar L - A roboVITics project",
     author_email = "arunk609@gmail.com",
     license = "MIT",
     classifiers = [

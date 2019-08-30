@@ -22,10 +22,10 @@ class Slacker(object):
 
             raise NoSlacksForYou("Could not authenticate with this token")
 
-    def sendMessage(self, channel_name = None, message = None, token = None):
+    def sendMessage(self, channel_name = None, user_name = None, message = None, token = None):
 
-        if channel_name == None:
-            raise NoSlacksForYou("Please specify valid channel")
+        if (channel_name == None and user_name == None):
+            raise NoSlacksForYou("Please specify valid channel or user")
 
         if message == None:
             raise NoSlacksForYou("Please Specify the message")
@@ -34,14 +34,31 @@ class Slacker(object):
 
             connection = SlackClient(token)
 
-            api_call = connection.api_call("channels.list", exclude_archives = 1)
-            channels = api_call.get('channels')
+            if(channel_name != None):
 
-            for channel in channels:
 
-                if channel.get('name') == channel_name:
+                api_call = connection.api_call("channels.list", exclude_archives = 1)
+                channels = api_call.get('channels')
 
-                    channel_id = channel.get('id')
+                for channel in channels:
+
+                    if channel.get('name') == channel_name:
+
+                        channel_id = channel.get('id')
+
+            if(user_name != None):
+
+                users = connection.api_call('users.list')
+
+                users = users['members']
+
+                for user in users:
+
+                    if(user.get('real_name') != None):
+
+                        if(user.get('real_name') == user_name):
+
+                            channel_id = user.get('id')
 
             api_call = connection.api_call("chat.postMessage", channel = channel_id, text = message, username = "Coffeeshop")
 
@@ -58,13 +75,14 @@ SCLK = Slacker()
 
 class Coffeeshop(keras.callbacks.Callback):
 
-    @staticmethod
 
-    def __init__(self, token = None, channel_name = None, epoch_num = 1):
+
+    def __init__(self, token = None, channel_name = None, user_name = None, epoch_num = 1):
 
         self.token = token
         self.channel_name = channel_name
         self.epoch_num = epoch_num
+        self.user_name = user_name
 
     def on_train_begin(self, logs={}, secret = None):
         
@@ -89,11 +107,11 @@ class Coffeeshop(keras.callbacks.Callback):
 
             self.message = " Epoch: {} \n Loss: {} \n Accuracy: {}".format(epoch, self.loss, self.acc)
 
-            SCLK.sendMessage(channel_name = self.channel_name, message = self.message, token = self.token)
+            SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
 
     def on_train_end(self, logs = {}):
 
         self.message = "Model Trained \n No. of epochs: {} \n Loss value: {} \n Accuracy : {}".format(self.num_epochs[-1]+1, self.losses[-1], self.accuracy[-1])
 
-        SCLK.sendMessage(channel_name = self.channel_name, message = self.message, token = self.token)
+        SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
 
