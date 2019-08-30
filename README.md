@@ -18,7 +18,7 @@ secret = 'xoxp-slacktoken'
 # For sending metrics to channel.
 channel_name = 'name_of_channel_to_be_posted'
 
-histories = coffeeshop(token = secret, channel_name = channel_name, epoch_num = 5)
+histories = Coffeeshop(token = secret, channel_name = channel_name, epoch_num = 5)
 
 # For sending metrics to user.
 
