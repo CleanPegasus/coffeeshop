@@ -96,22 +96,23 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
 
         self.losses.append(logs.get('loss'))
-        self.accuracy.append(logs.get('acc'))
+        #self.accuracy.append(logs.get('acc'))
         self.num_epochs.append(epoch)
+
+        print(logs.get('acc'))
         
         
         if(epoch % self.epoch_num == 0):
 
             self.loss = float("{0:.6f}".format(self.losses[-1]))
-            self.acc = float("{0:.6f}".format(self.accuracy[-1]))
+            #self.acc = float("{0:.6f}".format(self.accuracy[-1]))
 
-            self.message = " Epoch: {} \n Loss: {} \n Accuracy: {}".format(epoch, self.loss, self.acc)
+            self.message = " Epoch: {} \n Loss: {}".format(epoch, self.loss)
 
             SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
 
     def on_train_end(self, logs = {}):
 
-        self.message = "Model Trained \n No. of epochs: {} \n Loss value: {} \n Accuracy : {}".format(self.num_epochs[-1]+1, self.losses[-1], self.accuracy[-1])
+        self.message = "Model Trained \n No. of epochs: {} \n Loss value: {}".format(self.num_epochs[-1]+1, self.losses[-1])
 
         SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
-
