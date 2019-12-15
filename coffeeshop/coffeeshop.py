@@ -1,4 +1,4 @@
-import keras
+import tensorflow.keras
 from slackclient import SlackClient
 
 
@@ -73,7 +73,7 @@ SCLK = Slacker()
             
 
 
-class Coffeeshop(keras.callbacks.Callback):
+class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
 
 

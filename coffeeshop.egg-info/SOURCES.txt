@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+coffeeshop/coffeeshop.py
+coffeeshop.egg-info/PKG-INFO
+coffeeshop.egg-info/SOURCES.txt
+coffeeshop.egg-info/dependency_links.txt
+coffeeshop.egg-info/requires.txt
+coffeeshop.egg-info/top_level.txt
