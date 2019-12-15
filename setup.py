@@ -23,6 +23,6 @@ setup(
     ],
     packages = ["coffeeshop"],
     include_package_data = True,
-    install_requires = ["keras", "slackclient"]
+    install_requires = ["tensorflow", "slackclient"]
 
 )
