@@ -26,7 +26,7 @@ histories = Coffeeshop(token = secret, channel_name = channel_name, epoch_num = 
 
 user = 'User Name'
 
-histories = coffeeshop(token = secret, user_name = user, epoch_num = 5)
+histories = Coffeeshop(token = secret, user_name = user, epoch_num = 5)
 
 ## Add histories in the callbacks.
 
