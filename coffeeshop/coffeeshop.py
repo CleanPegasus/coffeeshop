@@ -1,14 +1,10 @@
 import tensorflow.keras
 from slackclient import SlackClient
 
-
-
 class NoSlacksForYou(Exception):
     pass
-
 class Slacker(object):
-
-    
+ 
     connection = None
 
     def __init__(self, token = None):
@@ -17,7 +13,6 @@ class Slacker(object):
 
             connection = SlackClient(token)
             
-
         except:
 
             raise NoSlacksForYou("Could not authenticate with this token")
@@ -35,7 +30,6 @@ class Slacker(object):
             connection = SlackClient(token)
 
             if(channel_name != None):
-
 
                 api_call = connection.api_call("channels.list", exclude_archives = 1)
                 channels = api_call.get('channels')
@@ -70,8 +64,6 @@ class Slacker(object):
 
 SCLK = Slacker()
 
-            
-
 
 class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
@@ -91,8 +83,6 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
         self.num_epochs = []
 
 
-        
-
     def on_epoch_end(self, epoch, logs={}):
 
         self.losses.append(logs.get('loss'))
@@ -109,10 +99,22 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
             self.message = " Epoch: {} \n Loss: {}".format(epoch, self.loss)
 
-            SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
+            try:
+
+                SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
+
+            except:
+
+                NoSlacksForYou("Could not send the message")
 
     def on_train_end(self, logs = {}):
 
         self.message = "Model Trained \n No. of epochs: {} \n Loss value: {}".format(self.num_epochs[-1]+1, self.losses[-1])
 
-        SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
+        try:
+
+            SCLK.sendMessage(channel_name = self.channel_name, user_name = self.user_name, message = self.message, token = self.token)
+
+        except:
+
+            NoSlacksForYou("Could not send the message")
