@@ -86,18 +86,25 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
 
         self.losses.append(logs.get('loss'))
-        #self.accuracy.append(logs.get('acc'))
+        self.accuracy.append(logs.get('accuracy'))
         self.num_epochs.append(epoch)
 
-        print(logs.get('acc'))
+        print(logs)
         
         
         if(epoch % self.epoch_num == 0):
 
             self.loss = float("{0:.6f}".format(self.losses[-1]))
-            #self.acc = float("{0:.6f}".format(self.accuracy[-1]))
 
-            self.message = " Epoch: {} \n Loss: {}".format(epoch, self.loss)
+            if self.accuracy[-1] == None:
+                self.acc = None
+            else:
+                self.acc = float("{0:.6f}".format(self.accuracy[-1]))
+            #self.val_loss = float("{0:.6f}".format(self.val_losses[-1]))
+            #self.val_acc = float("{0:.6f}".format(self.val_accuracy[-1]))
+
+
+            self.message = "Epoch: {}\nLoss: {}\nAccuracy: {}".format(epoch, self.loss, self.acc)
 
             try:
 
@@ -109,7 +116,7 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
     def on_train_end(self, logs = {}):
 
-        self.message = "Model Trained \n No. of epochs: {} \n Loss value: {}".format(self.num_epochs[-1]+1, self.losses[-1])
+        self.message = "Model Trained\nNo. of epochs: {}\nLoss value: {}\nAccuracy Value: {}".format(self.num_epochs[-1]+1, self.losses[-1], self.accuracy[-1])
 
         try:
 
