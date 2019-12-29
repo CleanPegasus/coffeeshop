@@ -87,9 +87,10 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
         self.losses.append(logs.get('loss'))
         self.accuracy.append(logs.get('accuracy'))
+        self.val_losses.append(logs.get('val_loss'))
+        self.val_acc.append(logs.get('val_accuracy'))
         self.num_epochs.append(epoch)
 
-        print(logs)
         
         
         if(epoch % self.epoch_num == 0):
@@ -100,12 +101,22 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
                 self.acc = "Not Specified"
             else:
                 self.acc = float("{0:.6f}".format(self.accuracy[-1]))
+
+            if self.val_losses[-1] == None:
+                self.val_loss = "Not Specified"
+            else:
+                self.val_loss = float("{0:.6f}".format(self.val_losses[-1]))
+
+            if self.val_accuracy[-1] == None:
+                self.val_acc = "Not Specified"
+            else:
+                self.val_acc = float("{0:.6f}".format(self.val_accuracy[-1]))
             
             #self.val_loss = float("{0:.6f}".format(self.val_losses[-1]))
             #self.val_acc = float("{0:.6f}".format(self.val_accuracy[-1]))
 
 
-            self.message = " Epoch: {} \n Loss: {} \n Accuracy: {}".format(epoch, self.loss, self.acc)
+            self.message = " Epoch: {} \n Loss: {} \n Accuracy: {} \n Validation Loss: {} \n Validation Accuracy: {}".format(epoch, self.loss, self.acc, self.val_loss, self.val_acc)
 
             try:
 
@@ -123,7 +134,19 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
 
             self.acc = self.accuracy[-1]
 
-        self.message = " Model Trained \n No. of epochs: {} \n Loss value: {} \n Accuracy Value: {}".format(self.num_epochs[-1]+1, self.losses[-1], self.acc)
+        if self.val_losses[-1] == None:
+                self.val_loss = "Not Specified"
+        else:
+
+            self.val_loss = self.val_losses[-1]
+
+        if self.val_accuracy[-1] == None:
+                self.val_acc = "Not Specified"
+        else:
+
+            self.val_acc = self.val_accuracy[-1]
+
+        self.message = " Model Trained \n No. of epochs: {} \n Loss value: {} \n Accuracy Value: {} \n Validation Loss: {} \n Validation Accuracy: {}".format(self.num_epochs[-1]+1, self.losses[-1], self.acc, self.val_loss, self.val_acc)
 
         try:
 
