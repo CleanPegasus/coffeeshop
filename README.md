@@ -2,7 +2,7 @@
 
 # Coffeeshop
 
-This package sends your deep learning training loss and accuracy to your slack channel after every specified epoch.
+This package sends your deep learning model's training and validation metrics to your slack channel after every specified epoch.
 It uses slackclient and keras python packages.
 
 ### Installation
