@@ -9,8 +9,8 @@ def readme():
 setup(
 
     name = "coffeeshop",
-    version = "1.1.0",
-    description = "A python package that sends your deep learning training loss to your slack channel after every specified epoch.",
+    version = "1.2.0",
+    description = "A python package that sends your deep learning training and validation metrics to your slack channel or user after every specified epoch.",
     long_description = readme(),
     long_description_content_type = "text/markdown",
     url = "https://github.com/CleanPegasus/coffeeshop",
@@ -23,6 +23,6 @@ setup(
     ],
     packages = ["coffeeshop"],
     include_package_data = True,
-    install_requires = ["tensorflow", "slackclient"]
+    install_requires = ["tensorflow>=1.14", "slackclient"]
 
 )
