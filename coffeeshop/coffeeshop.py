@@ -1,4 +1,4 @@
-import tensorflow.keras
+import keras
 from slackclient import SlackClient
 
 class NoSlacksForYou(Exception):
@@ -65,7 +65,7 @@ class Slacker(object):
 SCLK = Slacker()
 
 
-class Coffeeshop(tensorflow.keras.callbacks.Callback):
+class Coffeeshop(keras.callbacks.Callback):
 
 
 
@@ -80,6 +80,8 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
         
         self.losses = []
         self.accuracy = []
+        self.val_losses = []
+        self.val_accuracy = []
         self.num_epochs = []
 
 
@@ -88,7 +90,7 @@ class Coffeeshop(tensorflow.keras.callbacks.Callback):
         self.losses.append(logs.get('loss'))
         self.accuracy.append(logs.get('accuracy'))
         self.val_losses.append(logs.get('val_loss'))
-        self.val_acc.append(logs.get('val_accuracy'))
+        self.val_accuracy.append(logs.get('val_accuracy'))
         self.num_epochs.append(epoch)
 
         
