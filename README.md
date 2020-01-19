@@ -28,7 +28,7 @@ user = 'User Name'
 
 histories = Coffeeshop(token = secret, user_name = user, epoch_num = 5)
 
-## Add histories in the callbacks.
+# Add histories in the callbacks.
 
 model.fit(X_train, Y_train, epochs = epochs, batch_size = batch_size,callbacks = [histories])
 
